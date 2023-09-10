@@ -1,0 +1,30 @@
+version: "3"
+services:
+  sw_portal_web:
+    image: lkpark/rating-lab-web:latest
+    container_name: sw_portal_web
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    depends_on:
+      - sw_portal_cms
+  sw_portal_cms:
+    image: lkpark/rating-lab-cms:latest
+    container_name: sw_portal_cms
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      DATABASE_CLIENT: postgres
+      DATABASE_HOST: db
+      DATABASE_PORT: 5432
+      DATABASE_NAME: sw_portal_cms
+      DATABASE_USERNAME: admin
+      DATABASE_PASSWORD: password
+    ports:
+      - 1337:1337
+    depends_on:
+      - db
+  db:
+    image: lkpark/rating-lab-cms-db:latest
+    container_name: sw_portal_cms_db
+    restart: unless-stopped

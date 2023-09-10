@@ -1,0 +1,25 @@
+query {
+  facebookProfiles {
+    data {
+      attributes {
+        name
+        email
+        dob
+        picture {
+          data {
+            attributes {
+              url
+            }
+          }
+        }
+        album {
+          data {
+            attributes {
+              url
+            }
+          }
+        }
+      }
+    }
+  }
+}
